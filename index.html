@@ -421,8 +421,8 @@
         <h2 class="section-title">Virtual Video Walkthrough</h2>
         <p style="text-align: center; margin-bottom: 25px; color: #5a5045;">Experience the layout and flow of the cottage with our virtual walkthrough.</p>
         <div class="video-container">
-            <!-- Updated video tag with controls, muted, and ID for the script -->
-            <video id="tourVideo" src="Photos/walkthrough.mp4" controls muted playsinline></video>
+            <!-- Added id="tourVideo" and &enablejsapi=1&mute=1 to the URL -->
+            <iframe id="tourVideo" width="560" height="315" src="https://www.youtube.com/embed/8mjHkGeuz9U?si=HiURXo04jeABWOCC&enablejsapi=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
@@ -430,7 +430,6 @@
     <section id="contact">
         <h2 class="section-title">Contact Information</h2>
 
-        <!-- Adjusted Price Tag -->
         <div style="text-align: center; margin-bottom: 20px;">
             <div class="price-tag">Asking Price: $499,999</div>
         </div>
@@ -459,24 +458,39 @@
     <p>&copy; Valley Haven 2026</p>
 </footer>
 
-<!-- Auto-play on scroll script -->
+<!-- YouTube IFrame API and Auto-play on scroll script -->
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const video = document.getElementById("tourVideo");
+    var player;
 
-        // Create an observer that watches when the video enters the screen
+    // This function is automatically called by the YouTube API once it's loaded
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('tourVideo', {
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Mute the video to ensure autoplay works without user interaction
+        event.target.mute();
+
+        const videoElement = document.getElementById("tourVideo");
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // If 50% or more of the video is visible, play it
                 if (entry.isIntersecting) {
-                    video.play(); // Play when visible
+                    player.playVideo();
                 } else {
-                    video.pause(); // Pause when out of view
+                    player.pauseVideo();
                 }
             });
-        }, { threshold: 0.5 }); // Triggers when 50% of the video is on screen
+        }, { threshold: 0.5 });
 
-        observer.observe(video);
-    });
+        observer.observe(videoElement);
+    }
 </script>
 
 </body>
