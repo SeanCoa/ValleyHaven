@@ -7,7 +7,8 @@
 
     <!-- This line adds the house icon to the browser tab -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
-    
+
+
     <style>
         /* Base Styles - Rustic Theme */
         body {
@@ -242,6 +243,26 @@
             color: #c9c0b5;
         }
 
+        /* Property Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 3px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* The 3 Color States */
+        .status-active { background-color: #447a4b; }  /* Natural Green */
+        .status-pending { background-color: #d9822b; } /* Warm Orange */
+        .status-sold { background-color: #a8573c; }    /* Brick Red */
+
         /* Responsive */
         @media(max-width: 768px) {
             header h1 {
@@ -259,6 +280,7 @@
 <header>
     <h1>Valley Haven - Palisades Park</h1>
     <p>79735 Fernwood Drive, Covert, MI 49043</p>
+    <div class="status-badge status-active">Currently For Sale</div>
 </header>
 
 <div class="container">
@@ -294,7 +316,7 @@
                     <li><strong>Bedrooms:</strong> 4</li>
                     <li><strong>Bathrooms:</strong> 3</li>
                     <li><strong>Square Feet:</strong> 2,400</li>
-                    <li><strong>Heating/Cooling:</strong> Mini-Split</li>
+                    <li><strong>Heating/Cooling:</strong> Mini-Split/Electric Baseboard</li>
                     <li><strong>Water Supply:</strong> Private Well</li>
                     <li><strong>Garage:</strong> 1-Stall Attached</li>
                     <li><strong>2025 Real Estate Taxes:</strong> $3,855</li>
